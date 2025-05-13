@@ -39,7 +39,7 @@ public class BlockController : MonoBehaviour
         xI = sideSpawn * xI;
 
         print("sideSpawn: " + sideSpawn + " xI: " + xI);
-        transform.position = new Vector3(xI, currentY, 0f);
+        transform.localPosition = new Vector3(xI, currentY, 0f);
 
         byte randomColor = (byte)Random.Range(0, color.Length);
         spriteRenderer.color = color[randomColor];
@@ -60,5 +60,16 @@ public class BlockController : MonoBehaviour
     void Stop()
     {
        rbBlock.velocity = new Vector2(0f, 0f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            if (gameManager.playerSucced)
+            {
+                Stop();
+            }
+        }
     }
 }
