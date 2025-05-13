@@ -39,7 +39,7 @@ public class BlockController : MonoBehaviour
         xI = sideSpawn * xI;
 
         print("sideSpawn: " + sideSpawn + " xI: " + xI);
-        transform.localPosition = new Vector3(xI, currentY, 0f);
+        transform.position = new Vector3(xI, currentY, 0f);
 
         byte randomColor = (byte)Random.Range(0, color.Length);
         spriteRenderer.color = color[randomColor];

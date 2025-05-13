@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject PainelDefeat;
 
     public TextMeshProUGUI pontuacaoText;
+    private int aumentarVelocidade = 10;
     private float t;
-    public float tCurrent = 6f;
+    public float tCurrent = 5f;
     public float yCurrent = 0.5f;
 
     public bool playerSucced = true; 
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isInstanciate)
         {
-                GameObject block = Instantiate(blockPrefab, new Vector3(0f, yCurrent, 0f), Quaternion.identity);
+                GameObject block = Instantiate(blockPrefab, new Vector3(12f, yCurrent, 0f), Quaternion.identity);
                 //block.transform.SetParent(this.transform);
                 block.GetComponent<BlockController>();
 
@@ -51,13 +52,21 @@ public class GameManager : MonoBehaviour
             if (t > 0)
             {
                 t -= Time.deltaTime;
-                print("t: " + t);
+                //isInstanciate = false;
+                //print("t: " + t);
             }
             else
             {
                 isInstanciate = false;
                 
                 InstanciateBlock();
+
+                if (blockCount > aumentarVelocidade)
+                {
+                    tCurrent = Mathf.Max(0.3f, tCurrent - 0.5f); 
+                    aumentarVelocidade += 10;
+                }
+
                 t = tCurrent;
                 playerSucced = false;
                 Debug.Log("Instanciate Block");
