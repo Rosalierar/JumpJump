@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    Animator anim;
     GameManager gameManager;
     Rigidbody2D rb;
 
@@ -35,7 +36,8 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         gameManager = FindAnyObjectByType<GameManager>();
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody2D>(); 
+        anim = GetComponent<Animator>();  
 
     } 
     // Update is called once per frame
@@ -71,7 +73,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("v: " + v + " f: " + f + " a: " + a);  
 
                 //gameManager.GetScussedPayer(false, false);
-
+                anim.SetBool("isJump", true);
                 isJumping = true;
                 isGrounded = false;
                 totalJump = 0;
@@ -111,13 +113,14 @@ public class PlayerController : MonoBehaviour
             {
                 Vector2 normal = contact.normal;
 
-                if (Mathf.Abs(normal.y) > 0.5f)
+                if (Mathf.Abs(normal.y) > 0.6f)
                 {
                     Debug.Log("Colidiu pela Horizontal!");
                     
                     rb.gravityScale = 1;
                     isGrounded = true;
                     isJumping = false;
+                    anim.SetBool("isJump", false);
                         
                     // Colidiu pela lateral
 
