@@ -222,8 +222,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jump Jump
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 76a714dff3ff45646a569c32db80b4c8, type: 2}
+  m_sharedMaterial: {fileID: -7341732421237746485, guid: 76a714dff3ff45646a569c32db80b4c8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -358,8 +358,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 76a714dff3ff45646a569c32db80b4c8, type: 2}
+  m_sharedMaterial: {fileID: -7341732421237746485, guid: 76a714dff3ff45646a569c32db80b4c8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -797,8 +797,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'by: Rosalierar'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 76a714dff3ff45646a569c32db80b4c8, type: 2}
+  m_sharedMaterial: {fileID: -7341732421237746485, guid: 76a714dff3ff45646a569c32db80b4c8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

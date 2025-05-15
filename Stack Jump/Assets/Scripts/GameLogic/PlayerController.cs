@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded && gameManager.isInstanciate)
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P) || Input.touchCount > 0 || Input.GetMouseButtonDown(0))
             {
                 print("Posso pular?");
 
