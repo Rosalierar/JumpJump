@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] AudioClip[] audios;
+    AudioSource audioSource;
     Animator anim;
     GameManager gameManager;
     Rigidbody2D rb;
@@ -36,9 +38,9 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         gameManager = FindAnyObjectByType<GameManager>();
-        rb = GetComponent<Rigidbody2D>(); 
-        anim = GetComponent<Animator>();  
-
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     } 
     // Update is called once per frame
     void Update()
@@ -70,9 +72,11 @@ public class PlayerController : MonoBehaviour
 
                 rb.AddForce(f, ForceMode2D.Impulse);
 
-                Debug.Log("v: " + v + " f: " + f + " a: " + a);  
+                Debug.Log("v: " + v + " f: " + f + " a: " + a);
 
                 //gameManager.GetScussedPayer(false, false);
+                audioSource.clip = audios[0];
+                audioSource.Play();
                 anim.SetBool("isJump", true);
                 isJumping = true;
                 isGrounded = false;
@@ -121,15 +125,17 @@ public class PlayerController : MonoBehaviour
                     isGrounded = true;
                     isJumping = false;
                     anim.SetBool("isJump", false);
+                    audioSource.clip = audios[1];
+                    audioSource.Play();
                         
                     // Colidiu pela lateral
 
-                        if (!getBlock && lastBlock != collision.gameObject)
-                        {
-                            Debug.Log("Não é igual");
-                            lastBlock = collision.gameObject;
-                            getBlock = true;
-                        }
+                    if (!getBlock && lastBlock != collision.gameObject)
+                    {
+                        Debug.Log("Não é igual");
+                        lastBlock = collision.gameObject;
+                        getBlock = true;
+                    }
                         
                         if (getBlock && lastBlock == collision.gameObject)
                         {
