@@ -22,11 +22,11 @@ public class PlayerController : MonoBehaviour
     
     [Header("RayCastx")]
     public bool touchBlockSide = false;
-    /*hitX1;
+    RaycastHit2D hitX1;
     RaycastHit2D hitX2;
     [SerializeField] private float distanceSides;
     public Transform SpawnPointXL;
-    public Transform SpawnPointXR ;*/
+    public Transform SpawnPointXR;
 
     [Header("Jump Controller")]
     byte totalJump = 1;
@@ -52,35 +52,76 @@ public class PlayerController : MonoBehaviour
 
         //BlockCheck();
 
-        Jump();
+        ControllerJump();
     }
 
-    void Jump()
+    void CheckBlockSide()
+    {
+        hitX1 = Physics2D.Raycast(SpawnPointXR.position, Vector2.right, distanceSides, layerMask);
+    
+        if(hitX1.collider != null)
+        {
+            if (hitX1.collider.CompareTag("Block"))
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+                print("colidio direito");
+                touchBlockSide = true;
+            }
+        }
+        hitX2 = Physics2D.Raycast(SpawnPointXL.position, Vector2.left, distanceSides, layerMask);
+
+        if (hitX2.collider != null)
+        {
+            if (hitX2.collider.CompareTag("Block"))
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+                print("colidio esquerdo");
+                touchBlockSide = true;
+            }
+        }
+    }
+
+   void Jump()
+    {
+        anim.SetBool("isJump", true);
+        print("Posso pular?");
+
+        float a = Physics.gravity.magnitude;
+        float m = rb.mass;
+
+        float v = math.sqrt(2 * a * yAlturaMaxima);
+
+        Vector2 f = m * v * Vector2.up;
+
+        rb.AddForce(f, ForceMode2D.Impulse);
+
+        Debug.Log("v: " + v + " f: " + f + " a: " + a);
+
+        //gameManager.GetScussedPayer(false, false);
+
+        isJumping = true;
+        isGrounded = false;
+        totalJump = 0;
+    }
+
+    void ControllerJump()
     {
         if (isGrounded && gameManager.isInstanciate)
         {
-            if (Input.GetKeyDown(KeyCode.P) || Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.P) || (Input.GetMouseButtonDown(0)))
             {
-                print("Posso pular?");
+                Jump();
+            }
+            else if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        Jump();
 
-                float a = Physics.gravity.magnitude;
-                float m = rb.mass;
-
-                float v = math.sqrt(2 * a * yAlturaMaxima);
-
-                Vector2 f = m * v * Vector2.up ;
-
-                rb.AddForce(f, ForceMode2D.Impulse);
-
-                Debug.Log("v: " + v + " f: " + f + " a: " + a);
-
-                //gameManager.GetScussedPayer(false, false);
-                audioSource.clip = audios[0];
-                audioSource.Play();
-                anim.SetBool("isJump", true);
-                isJumping = true;
-                isGrounded = false;
-                totalJump = 0;
+                        break;
+                }
             }
         }
         if (rb.velocity.y >= 0)

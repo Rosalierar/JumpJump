@@ -60,15 +60,25 @@ public class BlockController : MonoBehaviour
     void Stop()
     {
        rbBlock.velocity = new Vector2(0f, 0f);
+       rbBlock.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if (gameManager.playerSucced)
+            foreach (ContactPoint2D contact in collision.contacts)
             {
-                Stop();
+                Vector2 normal = contact.normal;
+
+                if (Mathf.Abs(normal.y) > 0.6f)
+                {
+                    print("IAI");
+                    Stop();
+                }
+                /*if (gameManager.playerSucced)
+                        {
+                        }*/
             }
         }
     }
